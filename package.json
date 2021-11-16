@@ -1,0 +1,27 @@
+{
+  "name": "graphile.js",
+  "version": "1.0.0",
+  "description": "Node.js library for interacting with Graphile's REST API",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphile-software/graphile.js.git"
+  },
+  "keywords": [
+    "graphile",
+    "nodejs",
+    "javascript"
+  ],
+  "author": "Graphile Software",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graphile-software/graphile.js/issues"
+  },
+  "homepage": "https://github.com/graphile-software/graphile.js#readme",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}
