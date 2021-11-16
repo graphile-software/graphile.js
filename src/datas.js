@@ -6,6 +6,7 @@ class DataManager {
     if (!client) throw new Error('"client" cannot be undefined');
     this.client = client;
   }
+
   /**
    * Post data to a graph
    * @returns Graph
@@ -24,7 +25,7 @@ class DataManager {
 
       var res = await this.client.httpInstance
         .post(
-          `/graph/${id}`,
+          `/data/post/${id}`,
           { value: value, color: options ? options.color : undefined },
           {
             headers: {
@@ -32,6 +33,36 @@ class DataManager {
             },
           }
         )
+        .then(async (res) => {
+          return res.data;
+        });
+
+      return new Data(this.client, res);
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      } else {
+        return err;
+      }
+    }
+  }
+
+  /**
+   * Reset a graph's data
+   * @returns Graph
+   * @param id {string} - ID of the graph
+   */
+  async reset(id) {
+    try {
+      this.client.functions.checkEmit(this.client, this.client.eventManager);
+      if (!id) throw new Error("'id' cannot be undefined");
+
+      var res = await this.client.httpInstance
+        .delete(`/data/reset/${id}`, {
+          headers: {
+            Authorization: this.client.token,
+          },
+        })
         .then(async (res) => {
           return res.data;
         });
